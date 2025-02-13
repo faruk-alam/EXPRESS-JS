@@ -30,13 +30,29 @@ let posts = [
 ];
 // get all post
 app.get('/api/posts', (req, res) => {
-   res.json(posts)
+  // query string,limit & status code
+  let limit = parseInt(req.query.limit);
+  if(!isNaN(limit) && limit > 0) {
+    res.status(200).json(posts.slice(0, limit));
+  } else {      
+    res.status(200).json(posts);
+  }
+  console.log(req.query)
 })
 // get single post
-app.get('/api/posts/:id', (req, res))=> {
-
-    res.json(posts)
-}
-app.listen(port, () => {
+app.get('/api/posts/:id',(req, res)=> {
+  //console.log(req.params.id)
+  const id = parseInt(req.params.id);
+  // const post = posts.filter(p => p.id === id);
+  // res.json(post);
+  const post = posts.find(p => p.id === id);
+  if(post) {
+    res.status(200).json(post);
+  } else {
+    res.status(404).json({message: 'Post not found'});
+  }
+})
+app.listen(port, () => 
+{
   console.log(`Server is running on port ${port}`);
 });
