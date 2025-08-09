@@ -1,12 +1,12 @@
-// script should be like this - "scripts": {
+// script should be like this - "scripts": {v
   //   "start": "node file-name",
   //   "dev": "node --watch file-name"
 
   // },
 
-const express = require('express');
-const path = require('path');
-const port = process.env.PORT || 8000;
+  import express from "express";
+  import path from "path";
+  const port = process.env.PORT || 8000;
 
 const app = express();
 // setup static folder -
